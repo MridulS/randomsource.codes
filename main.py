@@ -22,6 +22,7 @@ github_packages = {
         "pandas-dev/pandas",
         "scikit-image/scikit-image",
         "matplotlib/matplotlib",
+        "ipython/ipython",
     ]
 }
 
@@ -44,7 +45,6 @@ def generate_random_file(extension: str):
         f"https://api.github.com/repos/{random_package}/git/trees/HEAD?recursive=1"
     )
     github_response = requests.get(API_URL)
-    print(API_URL)
     files = pd.DataFrame(github_response.json()["tree"])
     file_path = files[files.path.str.endswith(".py")].sample(1).path.values[0]
 
