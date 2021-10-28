@@ -10,7 +10,7 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return RedirectResponse("/py")
 
 
 github_packages = {
@@ -21,6 +21,7 @@ github_packages = {
         "scikit-learn/scikit-learn",
         "pandas-dev/pandas",
         "scikit-image/scikit-image",
+        "matplotlib/matplotlib",
     ]
 }
 
@@ -30,9 +31,14 @@ langs = ["py"]
 @app.get("/{extension}")
 def generate_random_file(extension: str):
     if extension not in langs:
-        raise HTTPException(
-            status_code=404, detail="Currently we also support python files."
+        # raise HTTPException(
+        #     status_code=404, detail="Currently we only support python files."
+        # )
+        # Instead redirect to a numpy file.
+        return RedirectResponse(
+            f"https://github.dev/numpy/numpy/blob/main/numpy/array_api/_array_object.py"
         )
+
     random_package = sample(github_packages[extension], 1)[0]
     API_URL = (
         f"https://api.github.com/repos/{random_package}/git/trees/HEAD?recursive=1"
