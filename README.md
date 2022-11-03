@@ -1,3 +1,5 @@
+#### NOTE: This doesn't work anymore, but the code can be used to recreate it on a new domain name.
+
 # Random Source Codes
 
 Never be bored again! Staring at your screen and just scrolling the great world wide web?
